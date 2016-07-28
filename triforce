@@ -13,10 +13,8 @@ import yaml
 config_files = sys.argv[1:]
 
 for config_file in config_files:
-    print(config_file)
     with open(config_file) as config_file_pointer:
         config = yaml.load(config_file_pointer)
-        print(config)
         urls = []
         symlinks = []
         for sysvenv in config:
@@ -30,4 +28,5 @@ for config_file in config_files:
                     symlinks.extend(data['symlink'])
                 except KeyError:
                     symlinks.append(program)
-        print(sysvenv, urls, symlinks)
+    for _ in config_file, config, sysvenv, urls, symlinks:
+        print(_)
