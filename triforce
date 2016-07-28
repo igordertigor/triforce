@@ -16,8 +16,7 @@ config_files = sys.argv[1:]
 for config_file in config_files:
     with open(config_file) as config_file_pointer:
         config = yaml.load(config_file_pointer)
-        urls = []
-        symlinks = []
+        urls, symlinks = [], []
         for sysvenv in config.values():
             for program, options in sysvenv.items():
                 try:
