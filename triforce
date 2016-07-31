@@ -10,14 +10,28 @@
 import os
 import sys
 import yaml
+import sh
+
 
 config_files = sys.argv[1:]
+
+
+def create_venv_2(venv_name):
+    venv_path = os.path.join(os.environ['HOME'], venv_name)
+    print("Will create venv at: '{0}'".format(venv_path))
+    print(sh.virtualenv(venv_path))
+
+
+
+def process_venv(venv_name):
+    create_venv_2(venv_name)
+
 
 for config_file in config_files:
     with open(config_file) as config_file_pointer:
         config = yaml.load(config_file_pointer)
         urls, symlinks = [], []
-        for sysvenv in config.values():
+        for sysvenv_name, sysvenv in config.items():
             for program, options in sysvenv.items():
                 try:
                     urls.append(options['url'])
@@ -27,5 +41,6 @@ for config_file in config_files:
                     symlinks.extend(options['symlink'])
                 except KeyError:
                     symlinks.append(program)
-    for _ in config_file, config, sysvenv, urls, symlinks:
+    process_venv(sysvenv_name)
+    for _ in config_file, config, sysvenv_name, sysvenv, urls, symlinks:
         print(_)
