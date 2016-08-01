@@ -20,13 +20,19 @@ config_files = sys.argv[1:]
 
 class Virtualenv(object):
 
-    def __init__(self, name, prefix=None,
-                 venv_command=None, urls=None, symlinks=None):
+    def __init__(self, name,
+                 venv_prefix=None,
+                 venv_command=None,
+                 urls=None,
+                 symlink_prefix=None,
+                 symlinks=None):
         self.name = name
-        self.prefix = prefix or os.environ['HOME']
-        self.path = os.path.join(self.prefix, self.name)
+        self.venv_prefix = venv_prefix or os.environ['HOME']
+        self.path = os.path.join(self.venv_prefix, self.name)
         self.venv_command = venv_command
         self.urls = urls
+        self.symlink_prefix = symlink_prefix or \
+            os.path.join(os.environ['HOME'], 'bin')
         self.symlinks = symlinks
 
     def __str__(self):
@@ -57,11 +63,19 @@ class Virtualenv(object):
                       format(self.pip_path, urls_string)))
 
     def symlink(self):
-        pass
+        for link in self.symlinks:  # triforce... link...
+            source = os.path.join(self.bin_path, link)
+            target = os.path.join(self.symlink_prefix)
+            print("Will symlink: '{0}' --> '{1}'".format(source, target))
+            try:
+                os.link(source, target)
+            except FileExistsError:
+                pass
 
     def process(self):
         self.create()
         self.install_dependencies()
+        self.symlink()
 
 
 def execute(command):
