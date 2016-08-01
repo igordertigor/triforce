@@ -21,11 +21,11 @@ config_files = sys.argv[1:]
 class Virtualenv(object):
 
     def __init__(self, name, prefix=None,
-                 python_version=3, urls=None, symlinks=None):
+                 venv_command=None, urls=None, symlinks=None):
         self.name = name
         self.prefix = prefix or os.environ['HOME']
         self.path = os.path.join(self.prefix, self.name)
-        self.python_version = python_version
+        self.venv_command = venv_command
         self.urls = urls
         self.symlinks = symlinks
 
@@ -34,13 +34,12 @@ class Virtualenv(object):
 
     def create(self):
         print("Creating venv at: '{0}'".format(self.path))
-        if self.python_version == 2:
+        if self.venv_command in [2, '2', 'py2', 'python2']:
             print(sh.Command('virtualenv {0}'.format(self.path)))
-        elif self.python_version == 3:
+        elif self.venv_command in [3, '3', 'py3', 'python3']:
             print(execute('pyvenv {0}'.format(self.path)))
         else:
-            raise Exception("Python version: '{0}'".
-                            format(self.python_version))
+            print(execute('{0} {0}'.format(self.venv_command, self.path)))
 
     @property
     def bin_path(self):
@@ -55,6 +54,7 @@ class Virtualenv(object):
                       format(self.pip_path, ' '.join(self.urls))))
 
     def symlink(self):
+        pass
 
     def process(self):
         self.create()
@@ -71,18 +71,26 @@ venvs = []
 for config_file in config_files:
     with open(config_file) as config_file_pointer:
         config = yaml.load(config_file_pointer)
+        venv_command = 'python3'
         urls, symlinks = [], []
         for sysvenv_name, sysvenv in config.items():
             for program, options in sysvenv.items():
-                try:
-                    urls.append(options['url'])
-                except KeyError:
-                    urls.append(program)
-                try:
-                    symlinks.extend(options['symlink'])
-                except KeyError:
-                    symlinks.append(program)
-        venvs.append(Virtualenv(sysvenv_name, urls=urls, symlinks=symlinks))
+                if program == 'triforce':
+                    try:
+                        venv_command = options['venv_command']
+                    except KeyError:
+                        pass
+                else:
+                    try:
+                        urls.append(options['url'])
+                    except KeyError:
+                        urls.append(program)
+                    try:
+                        symlinks.extend(options['symlink'])
+                    except KeyError:
+                        symlinks.append(program)
+        venvs.append(Virtualenv(sysvenv_name, venv_command=venv_command,
+                                urls=urls, symlinks=symlinks))
     for venv in venvs:
         print(venv)
         venv.process()
