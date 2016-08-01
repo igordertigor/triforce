@@ -45,7 +45,7 @@ Each system virtualenv contains a number of packages that will be installed and
 linked.
 
 The special `triforce` section contains additional parameters that govern how
-the system virtualenv will be conifgured. For example in both cases above, the
+the system virtualenv will be configured. For example in both cases above, the
 virtualenvs themselves and their symlinks will be installed into
 `/tmp/example`. In the `.demo_sysvenv2` case, the `venv_command` command has
 been set to `python2` indicating that a virtualenv with legacy python should be
