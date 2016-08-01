@@ -43,12 +43,18 @@ class Virtualenv(object):
                             format(self.python_version))
 
     @property
+    def bin_path(self):
+        return os.path.join(self.path, 'bin')
+
+    @property
     def pip_path(self):
-        return os.path.join(self.path, 'bin/pip')
+        return os.path.join(self.bin_path, 'pip')
 
     def install_dependencies(self):
         print(execute("{0} install {1}".
                       format(self.pip_path, ' '.join(self.urls))))
+
+    def symlink(self):
 
     def process(self):
         self.create()
