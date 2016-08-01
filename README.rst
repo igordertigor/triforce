@@ -46,17 +46,18 @@ linked.
 
 The special `triforce` section contains additional parameters that govern how
 the system virtualenv will be configured. For example in both cases above, the
-virtualenvs themselves and their symlinks will be installed into
-`/tmp/example`. In the `.demo_sysvenv2` case, the `venv_command` command has
-been set to `python2` indicating that a virtualenv with legacy python should be
-installed. In case that command doesn't work for you, you can also simply type
-a custom command string to create the virtualenv for you. This is provided as a
-fallback since there seem to be a myriad of ways of setting up a virtualenv and
-you never know what might work on a given system.
+virtualenvs themselves and their symlinks will be installed into `/tmp/example`
+(to ensure the example doesn't screw with your system). In the `.demo_sysvenv2`
+case, the `venv_command` command has been set to `python2` indicating that a
+virtualenv with legacy python should be installed. In case that command doesn't
+work for you, you can also simply type a custom command string to create the
+virtualenv for you. This is provided as a fallback since there seem to be a
+myriad of ways of setting up a virtualenv and you never know what might work on
+a given system.
 
 In addition to the names of the programs on PyPi, you need to specify which
 executables should be symlinked. This may seem redundant, but a) I don't know
-how to easily introspect a python package to obtain the scripts it installs and
+how to easily introspect a Python package to obtain the scripts it installs and
 b) maybe you want to have control over this. Anyway, for the tool `yadoma`
 above there is no list of symlinks and so the tool will attempt to symlink a
 script of the same name as the package on PyPi. Yes, this could have been done
