@@ -55,15 +55,15 @@ also simply type a custom command string to create the virtualenv for you. This
 is provided as a fallback since there seem to be a myriad of ways of setting up
 a virtualenv and you never know what might work on a given system.
 
-In addition to the names of the programs on PyPi, you need to specify which
-executables should be symlinked. This may seem redundant, but a) I don't know
-how to easily introspect a Python package to obtain the scripts it installs and
-b) maybe you want to have control over this. Anyway, for the tool `yadoma`
-above there is no list of symlinks and so the tool will attempt to symlink a
-script of the same name as the package on PyPi. Yes, this could have been done
-for `ipython` too, but then we wouldn't link the `iptest` script. Lastly, you
-can also specify a `url` which may contain the string that will be passed on to
-`pip`. In the example above we install `git-spindle` from github.
+In addition to the names of the packages on PyPi, you need to specify which
+executables or scripts should be symlinked. This may seem redundant, but a) I
+don't know how to easily introspect a Python package to obtain the scripts it
+installs and b) maybe you want to have control over this. Anyway, for the tool
+`yadoma` above there is no list of symlinks and so the tool will attempt to
+symlink a script of the same name as the package on PyPi. Yes, this could have
+been done for `ipython` too, but then we wouldn't link the `iptest` script.
+Lastly, you can also specify a `url` which may contain the string that will be
+passed on to `pip`. In the example above we install `git-spindle` from github.
 
 Lastly, I should also note that the tools `pip` and `pybuilder` will be
 installed by default into each created system virtualenv.
