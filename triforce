@@ -17,6 +17,9 @@ import sh
 
 config_files = sys.argv[1:]
 
+DEFAULT_VENV_PREFIX = os.environ['HOME']
+DEAFULT_VENV_COMMAND = "python3"
+DEFAULT_SYMLINK_PREFIX = os.path.join(os.environ['HOME'], 'bin')
 
 class Virtualenv(object):
 
@@ -27,12 +30,11 @@ class Virtualenv(object):
                  symlink_prefix=None,
                  symlinks=None):
         self.name = name
-        self.venv_prefix = venv_prefix or os.environ['HOME']
+        self.venv_prefix = venv_prefix or DEFAULT_VENV_PREFIX
         self.path = os.path.join(self.venv_prefix, self.name)
-        self.venv_command = venv_command
+        self.venv_command = venv_command or DEAFULT_VENV_COMMAND
         self.urls = urls
-        self.symlink_prefix = symlink_prefix or \
-            os.path.join(os.environ['HOME'], 'bin')
+        self.symlink_prefix = symlink_prefix or DEFAULT_SYMLINK_PREFIX
         self.symlinks = symlinks
 
     def __str__(self):
@@ -95,7 +97,7 @@ for config_file in config_files:
     with open(config_file) as config_file_pointer:
         config = yaml.load(config_file_pointer)
         for sysvenv_name, sysvenv in config.items():
-            venv_command = 'python3'
+            venv_command = None
             urls, symlinks = [], []
             for program, options in sysvenv.items():
                 if program == 'triforce':
