@@ -1,10 +1,10 @@
 triforce - system virtualenv symlink manager
 --------------------------------------------
 
-This is a system virtualenv symlink manager. It allows you main so-called
-system virtualenvironments that contain system utilities that you want to
-install with pip but that should reside outside the virtualenvs that you are
-using for development.  In fact, the use-case is similar to `pipsi
+This is a system virtualenv symlink manager. It allows you to maintain
+so-called system-virtual-environments that contain system utilities that you
+want to install with pip but that should reside outside the virtualenvs that
+you are using for development.  In fact, the use-case is similar to `pipsi
 <https://github.com/mitsuhiko/pipsi>`_ but takes a somewhat different approach.
 It was born out of my need to have a tool that suits exactly my needs. As such,
 it is probably biased to my particular way of getting things done.
@@ -49,11 +49,11 @@ the system virtualenv will be configured. For example in both cases above, the
 virtualenvs themselves and their symlinks will be installed into `/tmp/example`
 (to ensure the example doesn't screw with your system). In the `.demo_sysvenv2`
 case, the `venv_command` command has been set to `python2` indicating that a
-virtualenv with legacy python should be installed. In case that command doesn't
-work for you, you can also simply type a custom command string to create the
-virtualenv for you. This is provided as a fallback since there seem to be a
-myriad of ways of setting up a virtualenv and you never know what might work on
-a given system.
+virtualenv with legacy python should be installed. In case the command it uses
+under the hood (use the force, read the source) doesn't work for you, you can
+also simply type a custom command string to create the virtualenv for you. This
+is provided as a fallback since there seem to be a myriad of ways of setting up
+a virtualenv and you never know what might work on a given system.
 
 In addition to the names of the programs on PyPi, you need to specify which
 executables should be symlinked. This may seem redundant, but a) I don't know
