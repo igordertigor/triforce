@@ -30,17 +30,25 @@ class Virtualenv(object):
     def __str__(self):
         return str(self.__dict__)
 
+    def create(self):
+        print("Creating venv at: '{0}'".format(self.path))
+        if self.python_version == 2:
+            create_venv_2(self.path)
+        elif self.python_version == 3:
+            create_venv_3(self.path)
+        else:
+            raise Exception("Python version: '{0}'".format(self.python_version))
 
-def create_venv_2(venv):
-    print(sh.virtualenv(venv.path))
+    def process(self):
+        self.create()
 
 
-def create_venv_3(venv):
-    print(sh.python(['-m', 'venv', venv.path]))
+def create_venv_2(venv_path):
+    print(sh.virtualenv(venv_path))
 
 
-def process_venv(venv_name):
-    create_venv_2(venv_name)
+def create_venv_3(venv_path):
+    print(sh.pyvenv(venv_path))
 
 
 venvs = []
@@ -59,7 +67,6 @@ for config_file in config_files:
                 except KeyError:
                     symlinks.append(program)
         venvs.append(Virtualenv(sysvenv_name, urls=urls, symlinks=symlinks))
-    for _ in config_file, config, sysvenv_name, sysvenv, urls, symlinks:
-        print(_)
     for venv in venvs:
         print(venv)
+        venv.process()
