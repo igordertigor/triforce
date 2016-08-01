@@ -2,7 +2,7 @@ triforce - system virtualenv symlink manager
 --------------------------------------------
 
 This is a system virtualenv symlink manager. It allows you to maintain
-so-called system-virtual-environments that contain system utilities that you
+so-called system-virtual-environments which contain system utilities that you
 want to install with pip but that should reside outside the virtualenvs that
 you are using for development.  In fact, the use-case is similar to `pipsi
 <https://github.com/mitsuhiko/pipsi>`_ but takes a somewhat different approach.
