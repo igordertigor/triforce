@@ -79,6 +79,7 @@ class Virtualenv(object):
 
     def process(self):
         self.create()
+        self.bootstrap_utilities()
         self.install_dependencies()
         self.symlink()
 
