@@ -33,6 +33,12 @@ def create_venv_2(venv_name):
     print(sh.virtualenv(venv_path))
 
 
+def create_venv_3(venv_name):
+    venv_path = os.path.join(os.environ['HOME'], venv_name)
+    print("Will create venv at: '{0}'".format(venv_path))
+    print(sh.python(['-m', 'venv', venv_path]))
+
+
 def process_venv(venv_name):
     create_venv_2(venv_name)
 
