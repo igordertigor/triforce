@@ -50,8 +50,11 @@ class Virtualenv(object):
         return os.path.join(self.bin_path, 'pip')
 
     def install_dependencies(self):
+        urls_string = ' '.join(self.urls)
+        print("Installing dependencies: '{0}'".format(self.urls))
+        print("'pip' command is: '{0}'".format(self.pip_path))
         print(execute("{0} install {1}".
-                      format(self.pip_path, ' '.join(self.urls))))
+                      format(self.pip_path, urls_string)))
 
     def symlink(self):
         pass
