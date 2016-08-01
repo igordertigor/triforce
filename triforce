@@ -70,7 +70,7 @@ class Virtualenv(object):
     def symlink(self):
         for link in self.symlinks:  # triforce... link...
             source = os.path.join(self.bin_path, link)
-            target = os.path.join(self.symlink_prefix)
+            target = os.path.join(self.symlink_prefix, link)
             print("Will symlink: '{0}' --> '{1}'".format(source, target))
             try:
                 os.link(source, target)
