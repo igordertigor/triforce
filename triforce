@@ -9,6 +9,8 @@
 
 import os
 import sys
+import shlex
+
 import yaml
 import sh
 
@@ -33,22 +35,30 @@ class Virtualenv(object):
     def create(self):
         print("Creating venv at: '{0}'".format(self.path))
         if self.python_version == 2:
-            create_venv_2(self.path)
+            print(sh.Command('virtualenv {0}'.format(self.path)))
         elif self.python_version == 3:
-            create_venv_3(self.path)
+            print(execute('pyvenv {0}'.format(self.path)))
         else:
-            raise Exception("Python version: '{0}'".format(self.python_version))
+            raise Exception("Python version: '{0}'".
+                            format(self.python_version))
+
+    @property
+    def pip_path(self):
+        return os.path.join(self.path, 'bin/pip')
+
+    def install_dependencies(self):
+        print(execute("{0} install {1}".
+                         format(self.pip_path, ' '.join(self.urls))))
 
     def process(self):
         self.create()
+        self.install_dependencies()
 
 
-def create_venv_2(venv_path):
-    print(sh.virtualenv(venv_path))
-
-
-def create_venv_3(venv_path):
-    print(sh.pyvenv(venv_path))
+def execute(command):
+    p = shlex.split(command)
+    c = sh.Command(p[0])
+    return c(p[1:])
 
 
 venvs = []
