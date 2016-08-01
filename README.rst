@@ -1,5 +1,5 @@
-triforce - manage the link
---------------------------
+triforce - system virtualenv symlink manager
+--------------------------------------------
 
 This is system virtualenv symlink manager. It allows you main so-called system
 virtualenvironments that contain system utilities that you want to install with
