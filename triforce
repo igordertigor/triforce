@@ -73,7 +73,7 @@ class Virtualenv(object):
             target = os.path.join(self.symlink_prefix, link)
             print("Will symlink: '{0}' --> '{1}'".format(source, target))
             try:
-                os.link(source, target)
+                os.symlink(source, target)
             except FileExistsError:
                 pass
 
