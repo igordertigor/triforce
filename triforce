@@ -22,7 +22,6 @@ def create_venv_2(venv_name):
     print(sh.virtualenv(venv_path))
 
 
-
 def process_venv(venv_name):
     create_venv_2(venv_name)
 
