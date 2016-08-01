@@ -1,7 +1,6 @@
 .venv:
     triforce:
         venv_command: python3
-        prefix: /tmp
     ipython:
         symlink: ['ipython', 'iptest']
     yadoma: {}
