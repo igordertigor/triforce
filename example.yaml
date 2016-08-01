@@ -1,6 +1,15 @@
-.venv:
+.demo_sysvenv3:
     triforce:
-        venv_command: python3
+        venv_prefix: /tmp/example
+        symlink_prefix: /tmp/example
     ipython:
         symlink: ['ipython', 'iptest']
     yadoma: {}
+.demo_sysvenv2:
+    triforce:
+        venv_command: python2
+        venv_prefix: /tmp/example
+        symlink_prefix: /tmp/example
+    git-spindle:
+        url: git+ssh://git@github.com/seveas/git-spindle.git
+        symlink: ['git-hub']
