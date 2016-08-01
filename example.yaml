@@ -1,0 +1,7 @@
+.venv:
+    triforce:
+        python: 2
+    ipython:
+        url: http://example.test
+        symlink: ['ipython', 'iptest']
+    yadoma: {}
