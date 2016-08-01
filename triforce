@@ -16,6 +16,17 @@ import sh
 config_files = sys.argv[1:]
 
 
+class Virtualenv(object):
+
+    def __init__(self, venv_name, venv_path,
+                 python_version=3, urls=None, symlinks=None):
+        self.venv_name = venv_name
+        self.venv_path = venv_path
+        self.python_version = python_version
+        self.urls = urls
+        self.symlinks = symlinks
+
+
 def create_venv_2(venv_name):
     venv_path = os.path.join(os.environ['HOME'], venv_name)
     print("Will create venv at: '{0}'".format(venv_path))
