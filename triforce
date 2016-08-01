@@ -48,7 +48,7 @@ class Virtualenv(object):
 
     def install_dependencies(self):
         print(execute("{0} install {1}".
-                         format(self.pip_path, ' '.join(self.urls))))
+                      format(self.pip_path, ' '.join(self.urls))))
 
     def process(self):
         self.create()
