@@ -15,6 +15,7 @@ Principles
 * Declarative configuration based
 * Configurable path for the virtualenvs and the symlinks
 * Support one or many virtualenvs
+* Idempotent
 
 Example
 -------
