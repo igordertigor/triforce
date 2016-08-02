@@ -52,8 +52,8 @@ class Virtualenv(object):
 
     def bootstrap_utilities(self):
         print("Installing/upgrading utilities: 'pip' and 'pybuilder'")
-        print(execute("{0} install {1}".
-                      format(self.pip_path, '-U pip pybuilder')))
+        self.pip_install('pip')
+        self.pip_install('pybuilder')
 
     @property
     def bin_path(self):
@@ -62,6 +62,10 @@ class Virtualenv(object):
     @property
     def pip_path(self):
         return os.path.join(self.bin_path, 'pip')
+
+    def pip_install(self, stuff):
+        print(execute("{0} install -U {1}".
+                      format(self.pip_path, stuff)))
 
     def install_dependencies(self):
         urls_string = ' '.join(self.urls)
