@@ -40,33 +40,34 @@ Consider the following example.yaml:
             url: git+ssh://git@github.com/seveas/git-spindle.git
             symlink: ['git-hub']
 
-This will create two system virtualenvs `.demo_sysvenv3` and `.demo_sysvenv2`.
-The first, is based on Python 3 (the default) and the second on legacy Python.
-Each system virtualenv contains a number of packages that will be installed and
-linked.
+This will create two system virtualenvs ``.demo_sysvenv3`` and
+``.demo_sysvenv2``.  The first, is based on Python 3 (the default) and the
+second on legacy Python.  Each system virtualenv contains a number of packages
+that will be installed and linked.
 
-The special `triforce` section contains additional parameters that govern how
+The special ``triforce`` section contains additional parameters that govern how
 the system virtualenv will be configured. For example in both cases above, the
-virtualenvs themselves and their symlinks will be installed into `/tmp/example`
-(to ensure the example doesn't screw with your system). In the `.demo_sysvenv2`
-case, the `venv_command` command has been set to `python2` indicating that a
-virtualenv with legacy python should be installed. In case the command it uses
-under the hood (use the force, read the source) doesn't work for you, you can
-also simply type a custom command string to create the virtualenv for you. This
-is provided as a fallback since there seem to be a myriad of ways of setting up
-a virtualenv and you never know what might work on a given system.
+virtualenvs themselves and their symlinks will be installed into
+``/tmp/example`` (to ensure the example doesn't screw with your system). In the
+``.demo_sysvenv2`` case, the ``venv_command`` command has been set to
+``python2`` indicating that a virtualenv with legacy python should be
+installed. In case the command it uses under the hood (use the force, read the
+source) doesn't work for you, you can also simply type a custom command string
+to create the virtualenv for you. This is provided as a fallback since there
+seem to be a myriad of ways of setting up a virtualenv and you never know what
+might work on a given system.
 
 In addition to the names of the packages on PyPi, you need to specify which
 executables or scripts should be symlinked. This may seem redundant, but a) I
 don't know how to easily introspect a Python package to obtain the scripts it
 installs and b) maybe you want to have control over this. Anyway, for the tool
-`yadoma` above there is no list of symlinks and so the tool will attempt to
+``yadoma`` above there is no list of symlinks and so the tool will attempt to
 symlink a script of the same name as the package on PyPi. Yes, this could have
-been done for `ipython` too, but then we wouldn't link the `iptest` script.
-Lastly, you can also specify a `url` which may contain the string that will be
-passed on to `pip`. In the example above we install `git-spindle` from github.
+been done for ``ipython`` too, but then we wouldn't link the ``iptest`` script.
+Lastly, you can also specify a ``url`` which may contain the string that will be
+passed on to ``pip``. In the example above we install ``git-spindle`` from github.
 
-Lastly, I should also note that the tools `pip` and `pybuilder` will be
+Lastly, I should also note that the tools ``pip`` and ``pybuilder`` will be
 installed by default into each created system virtualenv.
 
 Here is what it looks like in action:
