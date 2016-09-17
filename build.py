@@ -14,4 +14,5 @@ default_task = "publish"
 
 @init
 def set_properties(project):
-    pass
+    project.depends_on('sh')
+    project.depends_on('pyyaml')
