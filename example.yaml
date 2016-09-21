@@ -2,6 +2,7 @@
     triforce:
         venv_prefix: /tmp/example
         symlink_prefix: /tmp/example
+        install: true
     ipython:
         symlink: ['ipython', 'iptest']
     yadoma: {}

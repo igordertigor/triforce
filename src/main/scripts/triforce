@@ -117,6 +117,12 @@ for config_file in config_files:
                         symlink_prefix = options['symlink_prefix']
                     except KeyError:
                         pass
+                    try:
+                        if options['install']:
+                            urls.append('triforce')
+                            symlinks.append('triforce')
+                    except KeyError:
+                        pass
                 else:
                     try:
                         urls.append(options['url'])

@@ -28,6 +28,7 @@ Consider the following example.yaml:
         triforce:
             venv_prefix: /tmp/example
             symlink_prefix: /tmp/example
+            install: true
         ipython:
             symlink: ['ipython', 'iptest']
         yadoma: {}
@@ -55,7 +56,9 @@ installed. In case the command it uses under the hood (use the force, read the
 source) doesn't work for you, you can also simply type a custom command string
 to create the virtualenv for you. This is provided as a fallback since there
 seem to be a myriad of ways of setting up a virtualenv and you never know what
-might work on a given system.
+might work on a given system. Lastly setting ``install`` to ``true`` will
+ensure that the ``triforce`` itself is installed and symlinked into the
+virtual environment, meaning you can delete whatever you used to bootstrap it.
 
 In addition to the names of the packages on PyPi, you need to specify which
 executables or scripts should be symlinked. This may seem redundant, but a) I
