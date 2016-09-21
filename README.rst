@@ -77,8 +77,64 @@ Here is what it looks like in action:
 
 .. code::
 
-    % ./triforce example.yaml                                                                                               :(
-    {'path': '/tmp/example/.demo_sysvenv2', 'symlink_prefix': '/tmp/example', 'venv_prefix': '/tmp/example', 'name': '.demo_sysvenv2', 'symlinks': ['git-hub'], 'venv_command': 'python2', 'urls': ['git+ssh://git@github.com/seveas/git-spindle.git']}
+    % triforce example.yaml 
+    {'name': '.demo_sysvenv3', 'symlinks': ['ipython', 'iptest', 'yadoma'], 'symlink_prefix': '/tmp/example', 'venv_command': 'python3', 'urls': ['ipython', 'yadoma'], 'venv_prefix': '/tmp/example', 'path': '/tmp/example/.demo_sysvenv3'}
+    Creating venv at: '/tmp/example/.demo_sysvenv3'
+    
+    'pip' command is: '/tmp/example/.demo_sysvenv3/bin/pip'
+    Installing/upgrading utilities: 'pip' and 'pybuilder'
+    Collecting pip
+      Using cached pip-8.1.2-py2.py3-none-any.whl
+    Installing collected packages: pip
+      Found existing installation: pip 8.1.1
+        Uninstalling pip-8.1.1:
+          Successfully uninstalled pip-8.1.1
+    Successfully installed pip-8.1.2
+    
+    Collecting pybuilder
+    Requirement already up-to-date: pip>=7.0 in /tmp/example/.demo_sysvenv3/lib/python3.5/site-packages (from pybuilder)
+    Collecting wheel (from pybuilder)
+      Using cached wheel-0.29.0-py2.py3-none-any.whl
+    Collecting tblib (from pybuilder)
+      Using cached tblib-1.3.0-py2.py3-none-any.whl
+    Installing collected packages: wheel, tblib, pybuilder
+    Successfully installed pybuilder-0.11.9 tblib-1.3.0 wheel-0.29.0
+    
+    Installing dependencies: '['ipython', 'yadoma']'
+    Collecting ipython
+      Using cached ipython-5.1.0-py3-none-any.whl
+    Collecting yadoma
+    Collecting traitlets>=4.2 (from ipython)
+      Using cached traitlets-4.3.0-py2.py3-none-any.whl
+    Collecting pygments (from ipython)
+      Using cached Pygments-2.1.3-py2.py3-none-any.whl
+    Collecting prompt-toolkit<2.0.0,>=1.0.3 (from ipython)
+      Using cached prompt_toolkit-1.0.7-py3-none-any.whl
+    Collecting decorator (from ipython)
+      Using cached decorator-4.0.10-py2.py3-none-any.whl
+    Collecting simplegeneric>0.8 (from ipython)
+    Collecting pexpect; sys_platform != "win32" (from ipython)
+      Using cached pexpect-4.2.1-py2.py3-none-any.whl
+    Requirement already satisfied (use --upgrade to upgrade): setuptools>=18.5 in /tmp/example/.demo_sysvenv3/lib/python3.5/site-packages (from ipython)
+    Collecting pickleshare (from ipython)
+      Using cached pickleshare-0.7.4-py2.py3-none-any.whl
+    Collecting pyyaml (from yadoma)
+    Collecting docopt (from yadoma)
+    Collecting six (from traitlets>=4.2->ipython)
+      Using cached six-1.10.0-py2.py3-none-any.whl
+    Collecting ipython-genutils (from traitlets>=4.2->ipython)
+      Using cached ipython_genutils-0.1.0-py2.py3-none-any.whl
+    Collecting wcwidth (from prompt-toolkit<2.0.0,>=1.0.3->ipython)
+      Using cached wcwidth-0.1.7-py2.py3-none-any.whl
+    Collecting ptyprocess>=0.5 (from pexpect; sys_platform != "win32"->ipython)
+      Using cached ptyprocess-0.5.1-py2.py3-none-any.whl
+    Installing collected packages: six, decorator, ipython-genutils, traitlets, pygments, wcwidth, prompt-toolkit, simplegeneric, ptyprocess, pexpect, pickleshare, ipython, pyyaml, docopt, yadoma
+    Successfully installed decorator-4.0.10 docopt-0.6.2 ipython-5.1.0 ipython-genutils-0.1.0 pexpect-4.2.1 pickleshare-0.7.4 prompt-toolkit-1.0.7 ptyprocess-0.5.1 pygments-2.1.3 pyyaml-3.12 simplegeneric-0.8.1 six-1.10.0 traitlets-4.3.0 wcwidth-0.1.7 yadoma-41.3
+    
+    Will symlink: '/tmp/example/.demo_sysvenv3/bin/ipython' --> '/tmp/example/ipython'
+    Will symlink: '/tmp/example/.demo_sysvenv3/bin/iptest' --> '/tmp/example/iptest'
+    Will symlink: '/tmp/example/.demo_sysvenv3/bin/yadoma' --> '/tmp/example/yadoma'
+    {'name': '.demo_sysvenv2', 'symlinks': ['git-hub'], 'symlink_prefix': '/tmp/example', 'venv_command': 'python2', 'urls': ['git+ssh://git@github.com/seveas/git-spindle.git'], 'venv_prefix': '/tmp/example', 'path': '/tmp/example/.demo_sysvenv2'}
     Creating venv at: '/tmp/example/.demo_sysvenv2'
     Running virtualenv with interpreter /usr/bin/python2
     New python executable in /tmp/example/.demo_sysvenv2/bin/python2
@@ -88,7 +144,9 @@ Here is what it looks like in action:
     'pip' command is: '/tmp/example/.demo_sysvenv2/bin/pip'
     Installing/upgrading utilities: 'pip' and 'pybuilder'
     Requirement already up-to-date: pip in /tmp/example/.demo_sysvenv2/lib/python2.7/site-packages
+    
     Collecting pybuilder
+    Requirement already up-to-date: pip>=7.0 in /tmp/example/.demo_sysvenv2/lib/python2.7/site-packages (from pybuilder)
     Collecting tblib (from pybuilder)
       Using cached tblib-1.3.0-py2.py3-none-any.whl
     Requirement already up-to-date: wheel in /tmp/example/.demo_sysvenv2/lib/python2.7/site-packages (from pybuilder)
@@ -97,86 +155,24 @@ Here is what it looks like in action:
     
     Installing dependencies: '['git+ssh://git@github.com/seveas/git-spindle.git']'
     Collecting git+ssh://git@github.com/seveas/git-spindle.git
-      Cloning ssh://git@github.com/seveas/git-spindle.git to /tmp/pip-uStkAq-build
-    Collecting github3.py>=0.9.0 (from git-spindle==3.2)
+      Cloning ssh://git@github.com/seveas/git-spindle.git to /tmp/pip-wqHeBB-build
+    Collecting github3.py>=0.9.0 (from git-spindle==3.3)
       Using cached github3.py-0.9.5-py2.py3-none-any.whl
-    Collecting whelk>=2.6 (from git-spindle==3.2)
-    Collecting docopt>=0.5.0 (from git-spindle==3.2)
-    Collecting uritemplate.py>=0.2.0 (from github3.py>=0.9.0->git-spindle==3.2)
-    Collecting requests>=2.0 (from github3.py>=0.9.0->git-spindle==3.2)
-      Using cached requests-2.10.0-py2.py3-none-any.whl
-    Installing collected packages: uritemplate.py, requests, github3.py, whelk, docopt, git-spindle
+    Collecting whelk>=2.6 (from git-spindle==3.3)
+    Collecting docopt>=0.5.0 (from git-spindle==3.3)
+    Collecting uritemplate.py>=0.2.0 (from github3.py>=0.9.0->git-spindle==3.3)
+      Downloading uritemplate.py-3.0.2-py2.py3-none-any.whl
+    Collecting requests>=2.0 (from github3.py>=0.9.0->git-spindle==3.3)
+      Using cached requests-2.11.1-py2.py3-none-any.whl
+    Collecting uritemplate>=2.0 (from uritemplate.py>=0.2.0->github3.py>=0.9.0->git-spindle==3.3)
+      Downloading uritemplate-3.0.0-py2.py3-none-any.whl
+    Installing collected packages: uritemplate, uritemplate.py, requests, github3.py, whelk, docopt, git-spindle
       Running setup.py install for git-spindle ... done
-    Successfully installed docopt-0.6.2 git-spindle-3.2 github3.py-0.9.5 requests-2.10.0 uritemplate.py-0.3.0 whelk-2.6
+    Successfully installed docopt-0.6.2 git-spindle-3.3 github3.py-0.9.5 requests-2.11.1 uritemplate-3.0.0 uritemplate.py-3.0.2 whelk-2.6
     
     Will symlink: '/tmp/example/.demo_sysvenv2/bin/git-hub' --> '/tmp/example/git-hub'
-    {'path': '/tmp/example/.demo_sysvenv3', 'symlink_prefix': '/tmp/example', 'venv_prefix': '/tmp/example', 'name': '.demo_sysvenv3', 'symlinks': ['ipython', 'iptest', 'yadoma'], 'venv_command': 'python3', 'urls': ['ipython', 'yadoma']}
-    Creating venv at: '/tmp/example/.demo_sysvenv3'
-    
-    'pip' command is: '/tmp/example/.demo_sysvenv3/bin/pip'
-    Installing/upgrading utilities: 'pip' and 'pybuilder'
-    Collecting pip
-      Using cached pip-8.1.2-py2.py3-none-any.whl
-    Collecting pybuilder
-      Using cached PyBuilder-0.11.9.tar.gz
-    Collecting tblib (from pybuilder)
-      Using cached tblib-1.3.0-py2.py3-none-any.whl
-    Collecting wheel (from pybuilder)
-      Using cached wheel-0.29.0-py2.py3-none-any.whl
-    Building wheels for collected packages: pybuilder
-      Running setup.py bdist_wheel for pybuilder ... error
-      Complete output from command /tmp/example/.demo_sysvenv3/bin/python3.5 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-xpca6850/pybuilder/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" bdist_wheel -d /tmp/tmpqkx5qndcpip-wheel- --python-tag cp35:
-      usage: -c [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
-         or: -c --help [cmd1 cmd2 ...]
-         or: -c --help-commands
-         or: -c cmd --help
-      
-      error: invalid command 'bdist_wheel'
-      
-      ----------------------------------------
-      Running setup.py clean for pybuilder
-    Failed to build pybuilder
-    Installing collected packages: pip, tblib, wheel, pybuilder
-      Found existing installation: pip 8.1.1
-        Uninstalling pip-8.1.1:
-          Successfully uninstalled pip-8.1.1
-      Running setup.py install for pybuilder ... done
-    Successfully installed pip-8.1.2 pybuilder-0.11.9 tblib-1.3.0 wheel-0.29.0
-    
-    Installing dependencies: '['ipython', 'yadoma']'
-    Collecting ipython
-      Using cached ipython-5.0.0-py2.py3-none-any.whl
-    Collecting yadoma
-    Collecting pexpect; sys_platform != "win32" (from ipython)
-      Using cached pexpect-4.2.0-py2.py3-none-any.whl
-    Collecting prompt-toolkit<2.0.0,>=1.0.3 (from ipython)
-      Using cached prompt_toolkit-1.0.3-py3-none-any.whl
-    Collecting pickleshare (from ipython)
-      Using cached pickleshare-0.7.3-py2.py3-none-any.whl
-    Collecting pygments (from ipython)
-      Using cached Pygments-2.1.3-py2.py3-none-any.whl
-    Collecting decorator (from ipython)
-      Using cached decorator-4.0.10-py2.py3-none-any.whl
-    Collecting traitlets>=4.2 (from ipython)
-      Using cached traitlets-4.2.2-py2.py3-none-any.whl
-    Requirement already satisfied (use --upgrade to upgrade): setuptools>=18.5 in /tmp/example/.demo_sysvenv3/lib/python3.5/site-packages (from ipython)
-    Collecting simplegeneric>0.8 (from ipython)
-    Collecting docopt (from yadoma)
-    Collecting pyyaml (from yadoma)
-    Collecting ptyprocess>=0.5 (from pexpect; sys_platform != "win32"->ipython)
-      Using cached ptyprocess-0.5.1-py2.py3-none-any.whl
-    Collecting six>=1.9.0 (from prompt-toolkit<2.0.0,>=1.0.3->ipython)
-      Using cached six-1.10.0-py2.py3-none-any.whl
-    Collecting wcwidth (from prompt-toolkit<2.0.0,>=1.0.3->ipython)
-      Using cached wcwidth-0.1.7-py2.py3-none-any.whl
-    Collecting ipython-genutils (from traitlets>=4.2->ipython)
-      Using cached ipython_genutils-0.1.0-py2.py3-none-any.whl
-    Installing collected packages: ptyprocess, pexpect, six, wcwidth, prompt-toolkit, pickleshare, pygments, decorator, ipython-genutils, traitlets, simplegeneric, ipython, docopt, pyyaml, yadoma
-    Successfully installed decorator-4.0.10 docopt-0.6.2 ipython-5.0.0 ipython-genutils-0.1.0 pexpect-4.2.0 pickleshare-0.7.3 prompt-toolkit-1.0.3 ptyprocess-0.5.1 pygments-2.1.3 pyyaml-3.11 simplegeneric-0.8.1 six-1.10.0 traitlets-4.2.2 wcwidth-0.1.7 yadoma-41.3
-    
-    Will symlink: '/tmp/example/.demo_sysvenv3/bin/ipython' --> '/tmp/example/ipython'
-    Will symlink: '/tmp/example/.demo_sysvenv3/bin/iptest' --> '/tmp/example/iptest'
-    Will symlink: '/tmp/example/.demo_sysvenv3/bin/yadoma' --> '/tmp/example/yadoma'
+
+
 
 
 TODO and Ideas
