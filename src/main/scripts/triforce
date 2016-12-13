@@ -107,24 +107,12 @@ def process_venvs():
                 urls, symlinks = [], []
                 for program, options in sysvenv.items():
                     if program == 'triforce':
-                        try:
-                            venv_command = options['venv_command']
-                        except KeyError:
-                            pass
-                        try:
-                            venv_prefix = options['venv_prefix']
-                        except KeyError:
-                            pass
-                        try:
-                            symlink_prefix = options['symlink_prefix']
-                        except KeyError:
-                            pass
-                        try:
-                            if options['install']:
+                            venv_command = options.get('venv_command')
+                            venv_prefix = options.get('venv_prefix')
+                            symlink_prefix = options.get('symlink_prefix')
+                            if 'install' in options:
                                 urls.append('triforce')
                                 symlinks.append('triforce')
-                        except KeyError:
-                            pass
                     else:
                         try:
                             urls.append(options['url'])
