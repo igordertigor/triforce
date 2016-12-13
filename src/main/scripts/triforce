@@ -65,7 +65,7 @@ class Virtualenv(object):
 
     def pip_install(self, stuff):
         print(self.execute("{0} install -U {1}".
-              format(self.pip_path, stuff)))
+              format(self.pip_path, stuff)), add_path=True)
 
     def install_dependencies(self):
         urls_string = ' '.join(self.urls)
