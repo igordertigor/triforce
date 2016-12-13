@@ -18,7 +18,7 @@ import sh
 config_files = sys.argv[1:]
 
 DEFAULT_VENV_PREFIX = os.environ['HOME']
-DEAFULT_VENV_COMMAND = "python3"
+DEFAULT_VENV_COMMAND = "python3"
 DEFAULT_SYMLINK_PREFIX = os.path.join(os.environ['HOME'], 'bin')
 
 class Virtualenv(object):
@@ -32,7 +32,7 @@ class Virtualenv(object):
         self.name = name
         self.venv_prefix = venv_prefix or DEFAULT_VENV_PREFIX
         self.path = os.path.join(self.venv_prefix, self.name)
-        self.venv_command = venv_command or DEAFULT_VENV_COMMAND
+        self.venv_command = venv_command or DEFAULT_VENV_COMMAND
         self.urls = urls
         self.symlink_prefix = symlink_prefix or DEFAULT_SYMLINK_PREFIX
         self.symlinks = symlinks
