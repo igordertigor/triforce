@@ -43,11 +43,11 @@ class Virtualenv(object):
     def create(self):
         print("Creating venv at: '{0}'".format(self.path))
         if self.venv_command in [2, '2', 'py2', 'python2']:
-            print(execute('virtualenv {0}'.format(self.path)))
+            print(self.execute('virtualenv {0}'.format(self.path)))
         elif self.venv_command in [3, '3', 'py3', 'python3']:
-            print(execute('pyvenv {0}'.format(self.path)))
+            print(self.execute('pyvenv {0}'.format(self.path)))
         else:
-            print(execute('{0} {1}'.format(self.venv_command, self.path)))
+            print(self.execute('{0} {1}'.format(self.venv_command, self.path)))
         print("'pip' command is: '{0}'".format(self.pip_path))
 
     def bootstrap_utilities(self):
@@ -64,13 +64,13 @@ class Virtualenv(object):
         return os.path.join(self.bin_path, 'pip')
 
     def pip_install(self, stuff):
-        print(execute("{0} install -U {1}".
+        print(self.execute("{0} install -U {1}".
                       format(self.pip_path, stuff)))
 
     def install_dependencies(self):
         urls_string = ' '.join(self.urls)
         print("Installing dependencies: '{0}'".format(self.urls))
-        print(execute("{0} install {1}".
+        print(self.execute("{0} install {1}".
                       format(self.pip_path, urls_string)))
 
     def symlink(self):
@@ -89,11 +89,12 @@ class Virtualenv(object):
         self.install_dependencies()
         self.symlink()
 
-
-def execute(command):
-    p = shlex.split(command)
-    c = sh.Command(p[0])
-    return c(p[1:])
+    def execute(self, command):
+        p = shlex.split(command)
+        c = sh.Command(p[0])
+        env = os.environ.copy()
+        env['PATH'] = self.bin_path + ':' + env['PATH']
+        return c(p[1:], _env=env)
 
 
 def process_venvs():
