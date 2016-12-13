@@ -88,12 +88,15 @@ class Virtualenv(object):
         self.install_dependencies()
         self.symlink()
 
-    def execute(self, command):
+    def execute(self, command, add_path=False):
         p = shlex.split(command)
         c = sh.Command(p[0])
-        env = os.environ.copy()
-        env['PATH'] = self.bin_path + ':' + env['PATH']
-        return c(p[1:], _env=env)
+        if not add_path:
+            return c(p[1:])
+        else:
+            env = os.environ.copy()
+            env['PATH'] = self.bin_path + ':' + env['PATH']
+            return c(p[1:], _env=env)
 
 
 def process_venvs():
