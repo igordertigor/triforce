@@ -47,7 +47,7 @@ class Virtualenv(object):
         elif self.venv_command in [3, '3', 'py3', 'python3']:
             print(execute('pyvenv {0}'.format(self.path)))
         else:
-            print(execute('{0} {0}'.format(self.venv_command, self.path)))
+            print(execute('{0} {1}'.format(self.venv_command, self.path)))
         print("'pip' command is: '{0}'".format(self.pip_path))
 
     def bootstrap_utilities(self):
