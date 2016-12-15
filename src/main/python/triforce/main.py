@@ -10,7 +10,6 @@ DEFAULT_VENV_COMMAND = "python3"
 DEFAULT_SYMLINK_PREFIX = os.path.join(os.environ['HOME'], 'bin')
 
 
-
 class Virtualenv(object):
 
     def __init__(self, name,
