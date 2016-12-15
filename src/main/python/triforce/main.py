@@ -1,11 +1,14 @@
 import os
+import sys
 import shlex
 
 import sh
+import yaml
 
 DEFAULT_VENV_PREFIX = os.environ['HOME']
 DEFAULT_VENV_COMMAND = "python3"
 DEFAULT_SYMLINK_PREFIX = os.path.join(os.environ['HOME'], 'bin')
+
 
 
 class Virtualenv(object):
@@ -125,3 +128,25 @@ def parse_venv(name, venv):
                       urls=urls,
                       symlink_prefix=symlink_prefix,
                       symlinks=symlinks)
+
+
+def process_venvs(config_files):
+    venvs = []
+    for config_file in config_files:
+        with open(config_file) as config_file_pointer:
+            config = yaml.load(config_file_pointer)
+            for name, venv in config.items():
+                venvs.append(parse_venv(name, venv))
+        return venvs
+
+
+def main():
+    config_files = sys.argv[1:]
+    try:
+        for venv in process_venvs(config_files):
+            print(venv)
+            venv.process()
+    except sh.ErrorReturnCode as e:
+        print(e)
+        print(e.stdout)
+        print(e.stderr)
