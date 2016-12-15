@@ -1,6 +1,31 @@
 import unittest
+import unittest.mock as mock
 
-from triforce import Virtualenv, parse_venv
+from triforce.main import Virtualenv, parse_venv
+
+
+class TestVirtualEnv(unittest.TestCase):
+
+    @mock.patch('triforce.main.DEFAULT_VENV_PREFIX', 'ANY_PREFIX')
+    @mock.patch('triforce.main.Virtualenv.execute')
+    def test_create_py3(self, execute_mock):
+        venv = Virtualenv('ANY_VENV')
+        venv.create()
+        execute_mock.assert_called_once_with('pyvenv ANY_PREFIX/ANY_VENV')
+
+    @mock.patch('triforce.main.DEFAULT_VENV_PREFIX', 'ANY_PREFIX')
+    @mock.patch('triforce.main.Virtualenv.execute')
+    def test_create_py2(self, execute_mock):
+        venv = Virtualenv('ANY_VENV', venv_command='python2')
+        venv.create()
+        execute_mock.assert_called_once_with('virtualenv ANY_PREFIX/ANY_VENV')
+
+    @mock.patch('triforce.main.DEFAULT_VENV_PREFIX', 'ANY_PREFIX')
+    @mock.patch('triforce.main.Virtualenv.execute')
+    def test_create_any_command(self, execute_mock):
+        venv = Virtualenv('ANY_VENV', venv_command='ANY_COMMAND')
+        venv.create()
+        execute_mock.assert_called_once_with('ANY_COMMAND ANY_PREFIX/ANY_VENV')
 
 
 class TestParseVirtualEnv(unittest.TestCase):

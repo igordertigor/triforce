@@ -139,7 +139,7 @@ def process_venvs(config_files):
     return venvs
 
 
-def main():
+def entry():
     config_files = sys.argv[1:]
     try:
         for venv in process_venvs(config_files):

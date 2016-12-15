@@ -1,1 +1,1 @@
-from .main import Virtualenv, parse_venv, main # noqa
+from .main import entry # noqa
