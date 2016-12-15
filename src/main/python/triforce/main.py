@@ -136,7 +136,7 @@ def process_venvs(config_files):
             config = yaml.load(config_file_pointer)
             for name, venv in config.items():
                 venvs.append(parse_venv(name, venv))
-        return venvs
+    return venvs
 
 
 def main():
