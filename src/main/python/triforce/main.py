@@ -20,9 +20,9 @@ class Virtualenv(object):
         self.venv_prefix = venv_prefix or DEFAULT_VENV_PREFIX
         self.path = os.path.join(self.venv_prefix, self.name)
         self.venv_command = venv_command or DEFAULT_VENV_COMMAND
-        self.urls = urls
+        self.urls = urls or []
         self.symlink_prefix = symlink_prefix or DEFAULT_SYMLINK_PREFIX
-        self.symlinks = symlinks
+        self.symlinks = symlinks or []
 
     def __str__(self):
         return str(self.__dict__)
