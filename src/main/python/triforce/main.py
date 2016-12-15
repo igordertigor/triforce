@@ -27,6 +27,15 @@ class Virtualenv(object):
     def __str__(self):
         return str(self.__dict__)
 
+    def __eq__(self, other):
+        return (self.name == other.name and
+                self.venv_prefix == other.venv_prefix and
+                self.venv_command == other.venv_command and
+                self.urls == other.urls and
+                self.symlink_prefix == other.symlink_prefix and
+                self.symlinks == other.symlinks
+                )
+
     def create(self):
         print("Creating venv at: '{0}'".format(self.path))
         if self.venv_command in [2, '2', 'py2', 'python2']:
