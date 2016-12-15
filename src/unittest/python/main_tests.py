@@ -45,7 +45,7 @@ class TestParseVirtualEnv(unittest.TestCase):
         received = parse_venv('ANY_VENV', input_)
         self.assertEqual(expected, received)
 
-    def test_parse_venv_triforce_install(self):
+    def test_parse_venv_triforce_no_install(self):
         input_ = {'triforce': {'venv_command': 'ANY_VENV_COMMAND',
                                'venv_prefix': 'ANY_VENV_PREFIX',
                                'symlink_prefix': 'ANY_SYMLINK_PREFIX'}}
