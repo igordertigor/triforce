@@ -13,9 +13,7 @@ import yaml
 
 from triforce import Virtualenv, parse_venv
 
-
 config_files = sys.argv[1:]
-
 
 
 def process_venvs():

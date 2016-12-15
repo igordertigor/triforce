@@ -105,11 +105,11 @@ def parse_venv(name, venv):
             try:
                 symlinks.extend(options['symlink'])
             except KeyError:
-                    symlinks.append(program)
+                symlinks.append(program)
 
     return Virtualenv(name,
                       venv_prefix=venv_prefix,
                       venv_command=venv_command,
                       urls=urls,
                       symlink_prefix=symlink_prefix,
-                      symlinks=symlinks))
+                      symlinks=symlinks)
