@@ -46,6 +46,30 @@ class TestVirtualEnv(unittest.TestCase):
             'ANY_PREFIX/ANY_VENV/bin/pip install -U ANY_PROGRAM',
             add_path=True)
 
+    @mock.patch('triforce.main.Virtualenv.pip_install')
+    def test_install_dependencies(self, pip_install_mock):
+        venv = Virtualenv('ANY_VENV', urls=['ANY_URL'])
+        venv.install_dependencies()
+        pip_install_mock.assert_has_calls([mock.call('ANY_URL')])
+
+    @mock.patch('triforce.main.Virtualenv.pip_install')
+    def test_install_dependencies_multiple(self, pip_install_mock):
+        venv = Virtualenv('ANY_VENV', urls=['ANY_URL1', 'ANY_URL2'])
+        venv.install_dependencies()
+        pip_install_mock.assert_has_calls([mock.call('ANY_URL1 ANY_URL2')])
+
+    @mock.patch('triforce.main.DEFAULT_SYMLINK_PREFIX', 'ANY_PREFIX')
+    @mock.patch('triforce.main.Virtualenv.bin_path', 'ANY_BIN_PATH')
+    def test_symlink(self):
+        venv = Virtualenv('ANY_VENV', symlinks=['ANY_URL1'])
+        with mock.patch('os.path.join') as join_mock:
+            join_mock.side_effect = ['ANY_SOURCE', 'ANY_TARGET']
+            with mock.patch('os.symlink') as symlink_mock:
+                venv.symlink()
+        join_mock.assert_has_calls([mock.call('ANY_BIN_PATH', 'ANY_URL1'),
+                                    mock.call('ANY_PREFIX', 'ANY_URL1')])
+        symlink_mock.assert_has_calls([mock.call('ANY_SOURCE', 'ANY_TARGET')])
+
 
 class TestParseVirtualEnv(unittest.TestCase):
 
