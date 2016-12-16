@@ -70,6 +70,16 @@ class TestVirtualEnv(unittest.TestCase):
                                     mock.call('ANY_PREFIX', 'ANY_URL1')])
         symlink_mock.assert_has_calls([mock.call('ANY_SOURCE', 'ANY_TARGET')])
 
+    @mock.patch('triforce.main.DEFAULT_SYMLINK_PREFIX', 'ANY_PREFIX')
+    @mock.patch('triforce.main.Virtualenv.bin_path', 'ANY_BIN_PATH')
+    def test_symlink_fail(self):
+        venv = Virtualenv('ANY_VENV', symlinks=['ANY_URL1'])
+        with mock.patch('os.path.join') as join_mock:
+            join_mock.side_effect = ['ANY_SOURCE', 'ANY_TARGET']
+            with mock.patch('os.symlink') as symlink_mock:
+                symlink_mock.side_effect = FileExistsError
+                venv.symlink()
+
 
 class TestParseVirtualEnv(unittest.TestCase):
 
