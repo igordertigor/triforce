@@ -1,3 +1,4 @@
+import sys
 from pybuilder.core import use_plugin, init
 from pybuilder.vcs import count_travis
 
@@ -18,3 +19,5 @@ version = count_travis()
 def set_properties(project):
     project.depends_on('sh')
     project.depends_on('pyyaml')
+    if sys.version_info[0] == 2:
+        project.build_depends_on('mock')
