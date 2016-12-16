@@ -27,6 +27,22 @@ class TestVirtualEnv(unittest.TestCase):
         venv.create()
         execute_mock.assert_called_once_with('ANY_COMMAND ANY_PREFIX/ANY_VENV')
 
+    @mock.patch('triforce.main.Virtualenv.pip_install')
+    def test_bootstrap_utilities(self, pip_install_mock):
+        venv = Virtualenv('ANY_VENV')
+        venv.bootstrap_utilities()
+        pip_install_mock.assert_has_calls([mock.call('pip'),
+                                           mock.call('pybuilder')])
+
+    @mock.patch('triforce.main.DEFAULT_VENV_PREFIX', 'ANY_PREFIX')
+    @mock.patch('triforce.main.Virtualenv.execute')
+    def test_pip_install(self, execute_mock):
+        venv = Virtualenv('ANY_VENV')
+        venv.pip_install('ANY_PROGRAM')
+        execute_mock.assert_called_once_with(
+            'ANY_PREFIX/ANY_VENV/bin/pip install -U ANY_PROGRAM',
+            add_path=True)
+
 
 class TestParseVirtualEnv(unittest.TestCase):
 
