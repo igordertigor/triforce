@@ -80,6 +80,23 @@ class TestVirtualEnv(unittest.TestCase):
                 symlink_mock.side_effect = FileExistsError
                 venv.symlink()
 
+    @mock.patch('triforce.main.Virtualenv.create')
+    @mock.patch('triforce.main.Virtualenv.bootstrap_utilities')
+    @mock.patch('triforce.main.Virtualenv.install_dependencies')
+    @mock.patch('triforce.main.Virtualenv.symlink')
+    def test_process(self,
+                     create_mock,
+                     bootstrap_utilities_mock,
+                     install_dependencies_mock,
+                     symlink_mock,
+                     ):
+        venv = Virtualenv('ANY_VENV', symlinks=['ANY_URL1'])
+        venv.process()
+        create_mock.assert_called_once_with()
+        bootstrap_utilities_mock.assert_called_once_with()
+        install_dependencies_mock.assert_called_once_with()
+        symlink_mock.assert_called_once_with()
+
 
 class TestParseVirtualEnv(unittest.TestCase):
 
