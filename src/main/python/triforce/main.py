@@ -133,7 +133,7 @@ def process_venvs(config_files):
     venvs = []
     for config_file in config_files:
         with open(config_file) as config_file_pointer:
-            config = yaml.load(config_file_pointer)
+            config = yaml.safe_load(config_file_pointer)
             for name, venv in config.items():
                 venvs.append(parse_venv(name, venv))
     return venvs
